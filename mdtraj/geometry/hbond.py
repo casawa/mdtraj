@@ -294,9 +294,11 @@ def baker_hubbard(traj, freq=0.1, exclude_water=True, periodic=True):
 
     mask = np.logical_and(distances < distance_cutoff, angles > angle_cutoff)
     # frequency of occurance of each hydrogen bond in the trajectory
-    occurance = np.sum(mask, axis=0).astype(np.double) / traj.n_frames
+#    occurance = np.sum(mask, axis=0).astype(np.double) / traj.n_frames
 
-    return angle_triplets[occurance > freq]
+    
+    return [angle_triplets[i] for i in mask]   # Commented below line such that the return value is hydrogen bond lists at each frame
+#   return angle_triplets[occurance > freq]
 
 
 def kabsch_sander(traj):
